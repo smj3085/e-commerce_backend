@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const data = await Tag.findAll( {
-      include: [{ model: Product }, { model: ProductTag }]
+      include: [{ model: Product, through: ProductTag }]
     });
     res.status(200).json(data);
   } catch (err) {
@@ -22,15 +22,15 @@ router.get('/:id', async (req, res) => {
   try {
     const data = await Tag.findByPk(req.params.id, {
       // JOIN with locations, using the Trip through table
-      include: [{ model: Product }, { model: ProductTag }]
+      include: [{ model: Product, through: ProductTag }]
     });
 
-    if (!tagData) {
+    if (!data) {
       res.status(404).json({ message: 'No tag found with this id!' });
       return;
     }
 
-    res.status(200).json(tagData);
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -41,7 +41,8 @@ router.post('/', async (req, res) => {
   try {
     const newTag = await Tag.create(
       {
-        tag: req.body.tag_name,
+        id: req.body.id,
+        tag_name: req.body.tag_name,
       })
 
     res.status(200).json(newTag);
@@ -52,20 +53,23 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  const updatedTag = await Tag.update(
-    {
+  try {
+    const updatedTag = await Tag.update({
       // All the fields you can update and the data attached to the request body.
       tag_name: req.body.tag_name,
     },
     {
-      where: {
-        id: req.params.id,
-      },
+      where: { id: req.params.id },
+    });
+    if (!updatedTag) {
+      res.status(404).json({ message: "No tag found at that Id!" });
     }
-  );
-    
-    res.json(updatedTag);
+    res.status(200).json(updatedTag);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
+
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value

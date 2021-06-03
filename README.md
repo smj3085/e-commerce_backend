@@ -32,6 +32,7 @@
   * All contributions welcome! 
 
   ## Test Instructions
+  * npm run seed 
   * npm start
 
   ## Questions
