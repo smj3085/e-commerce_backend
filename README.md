@@ -5,6 +5,7 @@
   #### Table of Contents
   * [Project Description](#project-description)
   * [Installation Instructions](#installation-instructions)
+  * [Screenshots](#screenshots)
   * [Usage Guidelines](#usage-guidelines)
   * [License](#license)
   * [Contribution Guidelines](#contribution-guidelines)
@@ -20,6 +21,11 @@
     * sequelize
     * express
     * dotenv
+
+  ## Screenshots
+  ![picture](./assets/categories.png)]
+  ![picture](./assets/products.png)]
+  ![picture](./assets/tags.png)]
 
   ## Usage Guidelines
   * See video demonstration

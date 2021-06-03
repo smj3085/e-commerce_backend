@@ -22,8 +22,7 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const data = await Product.findByPk(req.params.id, {
-      // JOIN with locations, using the Trip through table
+    const productData = await Product.findByPk(req.params.id, {
       include: [{ model: Category }, { model: Tag }]
     });
 
@@ -121,7 +120,7 @@ router.delete('/:id', async (req, res) => {
       }
     });
 
-    if (!categoryData) {
+    if (!deleteProduct) {
       res.status(404).json({ message: 'No product found with this id!' });
       return;
     }
