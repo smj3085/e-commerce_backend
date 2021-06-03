@@ -62,6 +62,7 @@ router.put('/:id', async (req, res) => {
     });
     if (!updatedTag) {
       res.status(404).json({ message: "No tag found at that Id!" });
+    return;
     }
     res.status(200).json(updatedTag);
   } catch (err) {
@@ -78,6 +79,7 @@ router.delete('/:id', async (req, res) => {
     });
     if (!deleteTag) {
       res.status(404).json({ message: "No tag found at that Id!" });
+      return;
     }
     res.status(200).json(deleteTag);
   } catch (err) {

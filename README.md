@@ -29,7 +29,7 @@
 
   ## Usage Guidelines
   * See video demonstration
-  ()
+  (https://drive.google.com/file/d/1h-wewTeAZa60DbP1uJv5BXPFmXj0oa4J/view)
 
   ## Credits
   * sm3085
